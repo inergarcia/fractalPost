@@ -7,7 +7,7 @@ Antes de entrar en materia les muestro algunas funciones y librerías complement
 
 1. Se empleo la librería externa [Victor](http://victorjs.org/) que posee un conjunto de funciones necesarias a la hora de trabajar con vectores.
 2. Se creó la clase ```quque``` la cual consta de una implementación muy básica de lo que seria una **cola**.
-```
+```Java Script
    export const queue = function() {
     this.q = []
 
@@ -33,7 +33,7 @@ Antes de entrar en materia les muestro algunas funciones y librerías complement
 }
 ```
 3. Se creó un archivo ```paint.js``` el cual contiene un conjunto de métodos para simplificar el proceso a la hora de "dibujar" sobre el ```canvas``` de ```html```
-```
+```Java Script
 export const resetCanvas = (ctx, width, height) => {
     ctx.fillStyle = '#071a52'
     ctx.fillRect(0, 0, width, height)
@@ -78,13 +78,13 @@ La siguiente figura nos ayudara a comprender el proceso matemático:
 A continuación el código:
 
 Importamos las dependencias necesarias.
-```
+```Java Script
 import Victor from 'victor'
 import {drawLine2Point} from './paint'
 ```
 
 Creamos una clase  ```Triangle```
-```
+```Java Script
 const Triangle = function(p1, p2, p3, tag) {
     this.p1 = p1
     this.p2 = p2
@@ -133,7 +133,7 @@ const Triangle = function(p1, p2, p3, tag) {
 ```
 
 Por último creamos la función que genera el fractal:
-```
+```Java Script
 export const Sierpinski = (ctx, p1, p2, p3, n) => {
     let T = []
     let root = new Triangle(p1, p2, p3, 'root')
@@ -184,7 +184,7 @@ A continuación el código:
 
 Importamos las dependencias necesarias:
 
-```
+```Java Script
 import Victor from 'victor'
 import {queue} from './queue'
 import {drawLine2Point} from './paint'
@@ -192,7 +192,7 @@ import {drawLine2Point} from './paint'
 
 Creamos una función auxiliar que retorna el punto entre A y B que forma un triángulo isósceles y rectángulo:
 
-```
+```Java Script
 const mP = (p1, p2) => {
 
     return new Victor(
@@ -203,7 +203,7 @@ const mP = (p1, p2) => {
 
 Creamos la función que genera el fractal mediante un algoritmo BFS.
 
-```
+```Java Script
 let Q = new queue();
 
 export const dragon_bfs = (ctx, a, b, n) => {
@@ -277,7 +277,7 @@ A continuación el código:
 
 Importamos las dependencias
 
-```
+```Java Script
 import {drawLineVector} from './paint'
 ```
 
@@ -285,7 +285,7 @@ Crearemos dos funciones auxiliares.
 
 La primera para determinar los puntos a 1/3 y 2/3 del segmento AB.
 
-```
+```Java Script
 const getPoint = (a, b, t) => {
     return {
         x: a.x * (1 - t) + b.x * t,
@@ -298,7 +298,7 @@ Esta función recibe 3 parámetros: los puntos a y b del segmento a particionar 
 
 La segunda función recibe tres parámetros: un punto ```p```, un punto ```c``` y un diferencial de angulo ```da``` (en radianes). Lo que hace es rotar el punto ```p``` ```da``` radianes sobre la circunferencia con centro en ```c```  y radio igual a la distancia entre el punto ```p``` y el punto ```c```.
 
-```
+```Java Script
 const getCirPoint = (p, c, da) => {
     let dx = p.x - c.x
     let dy = p.y - c.y
@@ -317,7 +317,7 @@ const getCirPoint = (p, c, da) => {
 
 Finalmente la función que genera la curva:
 
-```
+```Java Script
 const pi = Math.PI
 
 export const vonKock = (ctx, a, b, n) => {
@@ -344,7 +344,7 @@ Esta función recibe 4 parámetros:
 
 A continuación otra implementación que arroja el mismo resultado:
 
-```
+```Java Script
 const pi = Math.PI
 export const vonKock = (ctx, a, b, n) => {
     let P = [a, a, a, a, b]
@@ -396,7 +396,7 @@ Variando el nuevo tamaño y canda angulo de rotación se pueden crear infinidad 
 Veamos el código:
 
 Importamos las dependencias necesarias
-```
+```Java Script
 import Victor from 'victor'
 import {drawLine2Point} from './paint'
 ```
@@ -409,7 +409,7 @@ Creamos una clase  ```Branch``` la cual sera una representación de una rama del
  5. ```divl``` Factor de crecimiento de la rama izquierda (hija),
  6. ```divr``` Factor de crecimiento de la rama derecha (hija).
 
-```
+```Java Script
 const Branch = function(start, end, al, ar, divl, divr) {
     this.start = start
     this.end = end
@@ -446,7 +446,7 @@ const Branch = function(start, end, al, ar, divl, divr) {
 ```
 
 Por ultimo el código que genera el árbol:
-```
+```Java Script
 export const generateTree = (ctx, p1, p2, al, ar, divl, divr, n) => {
     let T = []
     let root = new Branch(p1, p2, al, ar, divl, divr)
@@ -490,7 +490,7 @@ Por ultimo les comentare de un algoritmo que generaliza todo lo que hemos visto 
 
 Un sistema L-System consiste de un alfabeto con el cual se generan cadenas de caracteres siguiendo determinadas reglas y comenzando por un ```string``` inicial denominado ```axion``` Veamos un ejemplo:
 
-```
+```Java Script
 axion = "A"
 rule1 = {key:"A", value:"AB"} //A =>> AB
 rule2 = {key:"B", value:"C"} //B ==> C
@@ -518,14 +518,14 @@ Con esto definido lo único que tenemos que hacer es seleccionar correctamente e
 Para la programación crearemos 3 funciones, una que genere el patron, otra que interprete el patron generado y la función que dibuje la figura.
 
 Primero importamos las dependencias.
-```
+```Java Script
 import Victor from 'victor'
 import {drawLine2Point} from './paint'
 ```
 
 Función que genera el patron:
 
-```
+```Java Script
 const create_patron = (sentence, rules) => {
     let nextSentece = ''
     for(let i = 0; i < sentence.length; i++){
@@ -547,7 +547,7 @@ const create_patron = (sentence, rules) => {
 ```
 
 Función interprete
-```
+```Java Script
 const interprete = (ctx, sentence, a, b, angle) => {
     let stack = []
     
@@ -598,7 +598,7 @@ const interprete = (ctx, sentence, a, b, angle) => {
 ```
 
 Por ultimo la función que dibuja el fractal:
-```
+```Java Script
 export const Lsystem = (ctx, axion, rules, a, b, angle, factor_scale, n) => {
     let sentence = axion
     let scale = 1
