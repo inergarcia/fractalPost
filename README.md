@@ -1,3 +1,6 @@
+![alt](./Fractality.jpg)
+
+
 Si eres un amante de los fractales, la geometría analítica y la programación, en este articulo aprenderás a dibujar fractales utilizando Java Script.
 
 Los fractales son figuras geométricas formadas por repeticiones de un mismo patron un gran número de veces. Un fractal nos da una representación gráfica de lo comúnmente conocido en la programación como **recursividad**. En este post programaremos algunos de los fractales más famosos.
